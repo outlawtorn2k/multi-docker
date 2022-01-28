@@ -3,20 +3,20 @@ sudo: required
 services:
   - docker
 before_install:
-  - docker build -t outlawtorn2k/react-test -f ./client/Dockerfile.dev ././client/Dockerfile.dev
+  - docker build -t outlawtorn/react-test -f ./client/Dockerfile.dev ././client/Dockerfile.dev
 
 script:
-  - docker run -e CI=true outlawtorn2k/react-test npm test -- --coverage
+  - docker run -e CI=true outlawtorn/react-test npm test -- --coverage
 
 after_success: 
-  - docker build -t outlawtorn2k/multi-client ./client
-  - docker build -t outlawtorn2k/multi-nginx ./nginx
-  - docker build -t outlawtorn2k/multi-server ./server
-  - docker build -t outlawtorn2k/multi-worker ./worker
+  - docker build -t outlawtorn/multi-client ./client
+  - docker build -t outlawtorn/multi-nginx ./nginx
+  - docker build -t outlawtorn/multi-server ./server
+  - docker build -t outlawtorn/multi-worker ./worker
   #Log in Dockercli
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Push images to dockerhub
-  - docker push outlawtorn2k/multi-client
-  - docker push outlawtorn2k/multi-nginx
-  - docker push outlawtorn2k/multi-server
-  - docker push outlawtorn2k/multi-worker
+  - docker push outlawtorn/multi-client
+  - docker push outlawtorn/multi-nginx
+  - docker push outlawtorn/multi-server
+  - docker push outlawtorn/multi-worker
